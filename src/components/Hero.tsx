@@ -26,7 +26,7 @@ export default function Hero() {
 
                             <div className="h-full relative top-40">
                                 <button className="bg-[#D9AC57] text-xl text-black cursor-pointer hover:bg-[#D9AC57]/40 top-20 px-2 py-2 rounded-xl"
-                                        onClick={() => redirect('/pages/auth/generator')}
+                                        onClick={() => redirect('/auth/generator')}
                                 >Get Cover Letter Now</button>
                             </div>
                         </div>

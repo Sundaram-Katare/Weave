@@ -25,7 +25,7 @@ export default function SignInPage() {
 
       // @ts-ignore
       if (res?.error) throw new Error(res.error);
-      router.push('/pages/auth/generator');
+      router.push('/auth/generator');
     } catch (err: any) {
       setError(err.message || 'Sign in failed');
     } finally {
@@ -96,7 +96,7 @@ export default function SignInPage() {
 
               <button
                 type="button"
-                onClick={() => router.push('/pages/signup')}
+                onClick={() => router.push('/signup')}
                 className="text-sm text-gray-600 underline mx-auto"
               >
                 Create account

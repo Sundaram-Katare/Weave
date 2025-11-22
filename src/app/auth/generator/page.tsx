@@ -17,7 +17,7 @@ export default function Generator() {
   const [loader, setLoader] = useState(false);
 
   if (!session) {
-    redirect("/pages/signin");
+    redirect("/signin");
   }
 
   const handleSubmit = async (e: React.FormEvent) => {

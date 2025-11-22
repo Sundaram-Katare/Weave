@@ -8,7 +8,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "../../../../components/ui/sidebar";
+} from "../../../components/ui/sidebar";
 
 import { Calendar, Home, icons, Inbox, Search, Settings, Gem, TableOfContents } from "lucide-react"
 import { title } from "process";
@@ -18,22 +18,22 @@ import { url } from "inspector";
 const items = [
   {
     title: "Home",
-    url: "/pages/auth/generator",
+    url: "/auth/generator",
     icon: Home,
   },
   {
     title: "My Letters",
-    url: "/pages/letters",
+    url: "/letters",
     icon: Inbox,
   },
   {
     title: "Pricing",
-    url: "/pages/pricing",
+    url: "/pricing",
     icon: Gem,
   },
   {
     title: "FAQ",
-    url: "/pages/faq",
+    url: "/faq",
     icon: TableOfContents,
   }
 ]

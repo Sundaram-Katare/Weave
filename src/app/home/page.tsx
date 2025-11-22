@@ -1,9 +1,9 @@
 "use client"
-import Navbar from "../../../components/Navbar";
-import Hero from "../../../components/Hero";
-import HowItWorks from "../../../components/HowItWorks";
-import Features from "../../../components/Features";
-import Footer from "../../../components/Footer";
+import Navbar from "../../components/Navbar";
+import Hero from "../../components/Hero";
+import HowItWorks from "../../components/HowItWorks";
+import Features from "../../components/Features";
+import Footer from "../../components/Footer";
 
 import { AnimatePresence, m, motion } from "framer-motion";
 import { useEffect, useState } from "react";

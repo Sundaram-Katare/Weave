@@ -42,7 +42,7 @@ export default function SignInPage() {
         password,
       });
 
-      router.push('/pages/auth/generator');
+      router.push('/auth/generator');
     } catch (err: any) {
       setError(err.message || 'Sign in failed');
     } finally {
@@ -123,7 +123,7 @@ export default function SignInPage() {
 
               <button
                 type="button"
-                onClick={() => router.push('/pages/signin')}
+                onClick={() => router.push('/signin')}
                 className="text-sm text-gray-600 underline mx-auto"
               >
                 Login

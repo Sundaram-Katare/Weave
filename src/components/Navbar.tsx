@@ -32,15 +32,15 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-10 text-xl">
           <Link href="/" className="hover:scale-105 transition-all duration-200 ease">Home</Link>
-          <Link href="/pages/faq" className="hover:scale-105 transition-all duration-200 ease">FAQ</Link>
-          <Link href="/pages/pricing" className="hover:scale-105 transition-all duration-200 ease">Pricing</Link>
-          <Link href={'/pages/gallery'} className="hover:scale-105 transition-all duration-200 ease">Gallery</Link>
-          <Link href="/pages/auth/generator" className="hover:scale-105 transition-all duration-200 ease">Generate</Link>
+          <Link href="/faq" className="hover:scale-105 transition-all duration-200 ease">FAQ</Link>
+          <Link href="/pricing" className="hover:scale-105 transition-all duration-200 ease">Pricing</Link>
+          <Link href={'/gallery'} className="hover:scale-105 transition-all duration-200 ease">Gallery</Link>
+          <Link href="/auth/generator" className="hover:scale-105 transition-all duration-200 ease">Generate</Link>
 
           {/* Buttons */}
           {!session ? (
             <Link
-              href="/pages/signin"
+              href="/signin"
               className="bg-[#082D8C] cursor-pointer text-white hover:bg-blue-400 transition-all hover:scale-105 text-lg flex gap-2 items-center px-3 py-1 rounded-2xl"
             >
               Get Started
@@ -48,7 +48,7 @@ export default function Navbar() {
             </Link>
           ) : (
             <button
-              onClick={() => signOut({ callbackUrl: "/pages/signin" })}
+              onClick={() => signOut({ callbackUrl: "/signin" })}
               className="bg-red-600 hover:bg-red-400 hover:scale-105 transition-all text-white flex gap-2 items-center px-3 py-1 rounded-xl text-lg"
             >
               Logout

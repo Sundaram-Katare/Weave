@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Home from "./pages/home/page";
-import Pricing from "./pages/pricing/page";
+import Home from "./home/page";
+import Pricing from "./pricing/page";
 
 export default function Landing() {
   return (

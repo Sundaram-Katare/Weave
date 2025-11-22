@@ -10,7 +10,7 @@ import {
   SidebarMenuItem,
 } from "../../../../components/ui/sidebar";
 
-import { Calendar, Home, icons, Inbox, Search, Settings, Gem } from "lucide-react"
+import { Calendar, Home, icons, Inbox, Search, Settings, Gem, TableOfContents } from "lucide-react"
 import { title } from "process";
 import { url } from "inspector";
 
@@ -31,14 +31,19 @@ const items = [
     url: "/pages/pricing",
     icon: Gem,
   },
+  {
+    title: "FAQ",
+    url: "/pages/faq",
+    icon: TableOfContents,
+  }
 ]
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <SidebarProvider>
+    <SidebarProvider className="pt-0">
       <Sidebar>
-        <SidebarHeader className="text-3xl font-poppins text-center font-bold mb-14">Tailor AI</SidebarHeader>
+        <SidebarHeader className="text-3xl font-poppins font-bold mb-14 pt-16"></SidebarHeader>
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupLabel className="text-xl font-poppins font-semibold">Application</SidebarGroupLabel>

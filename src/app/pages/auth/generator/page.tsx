@@ -3,6 +3,8 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
+import Tokens from "@/src/components/Tokens";
 
 export default function Generator() {
   const { data: session } = useSession();
@@ -41,7 +43,7 @@ export default function Generator() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(`Error: ${data.error}`);
+        toast.error(`Error: ${data.error}`);
         return;
       }
 
@@ -49,7 +51,7 @@ export default function Generator() {
       setTokensRemaining(data.tokensRemaining);
     } catch (err) {
       console.error("Error:", err);
-      alert("Failed to generate cover letter");
+      toast.error("Failed to generate cover letter");
     } finally {
       setLoading(false);
     }
@@ -75,10 +77,12 @@ export default function Generator() {
             Generate your cover letter
           </h2>
 
+          <Tokens />
+
           <form onSubmit={handleSubmit}>
 
             {/* JD */}
-            <div className="mb-6">
+            <div className="mb-6 mt-6">
               <label className="block text-lg font-semibold mb-1">
                 Job Description Content
               </label>
@@ -141,7 +145,7 @@ export default function Generator() {
               type="submit"
               disabled={loading}
               onClick={() => setLoader(true)}
-              className="w-full bg-[#F0B246] text-white py-3 rounded-md font-semibold shadow hover:opacity-90 transition"
+              className="w-full bg-[#F0B246] cursor-pointer text-white py-3 rounded-md font-semibold shadow hover:opacity-90 transition"
             >
               {loading ? "Generating..." : "Generate"}
             </motion.button>
@@ -189,7 +193,7 @@ export default function Generator() {
               ) : (
                 <>
                   <img
-                    src="https://i.pinimg.com/originals/68/b8/94/68b8941dab3b0f8047dc1c731456d175.gif"
+                    src="/images/generateImg.gif"
                     className="h-40 mb-4"
                     alt="waiting"
                   />

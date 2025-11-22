@@ -26,7 +26,7 @@ export default function Pricing() {
                                initial={{ opacity: 0, scale:0.5 }}
                                animate={{ opacity: 1, scale: 1 }}
                                transition={{ duration: 1, ease: "easeOut" }}
-                               src={"https://images.squarespace-cdn.com/content/v1/61279c7a695d1756146c5656/0481e5b0-db53-433c-a122-9209064fc84e/Unravel.gif"} 
+                               src={"/images/pricing.gif"} 
                                />
 
                               {/* <motion.h1 
@@ -61,11 +61,10 @@ export default function Pricing() {
                                     <div>
                                         <p className="font-semibold mb-2">Includes</p>
                                         <ul className="space-y-2">
-                                            <li className="flex gap-2"><Check color="green"/> 5 Generations</li>
+                                            <li className="flex gap-2"><Check color="green"/> 3 Generations</li>
                                             <li className="flex gap-2" ><Check color="green"/> Upload Resume</li>
                                             <li className="flex gap-2"><Check color="green"/> Paste JD</li>
                                             <li className="flex gap-2"><Check color="green"/> Save Cover Letter</li>
-                                            <li className="flex gap-2"><Check color="green"/> Standard-speech</li>
                                         </ul>
                                     </div>
                                  </div>
@@ -78,11 +77,10 @@ export default function Pricing() {
                                     <div>
                                         <p className="font-semibold mb-2">Includes</p>
                                         <ul className="space-y-2">
-                                            <li className="flex gap-2"><Check color="green"/> 5 Generations</li>
-                                            <li className="flex gap-2" ><Check color="green"/> Upload Resume</li>
+                                            <li className="flex gap-2"><Check color="green"/> 50 Generations</li>
+                                            <li className="flex gap-2" ><Check color="green"/>Upload multiple Resumes</li>
                                             <li className="flex gap-2"><Check color="green"/> Paste JD</li>
                                             <li className="flex gap-2"><Check color="green"/> Save Cover Letter</li>
-                                            <li className="flex gap-2"><Check color="green"/> Standard-speech</li>
                                         </ul>
                                     </div>
                                  </div>

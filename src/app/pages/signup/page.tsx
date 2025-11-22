@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -30,9 +31,10 @@ export default function SignInPage() {
 
       // @ts-ignore
       const data = await res.json();
-      if(!res.ok) throw new Error(data?.error || 'Signup Failed');
+      if (!res.ok) throw new Error(data?.error || 'Signup Failed');
 
       setSuccess('Acount Created');
+      toast.success('Congrats! You get 30 free tokens')
 
       const signInResult = await signIn('credentials', {
         redirect: false,
@@ -40,13 +42,13 @@ export default function SignInPage() {
         password,
       });
 
-      router.push('/');
+      router.push('/pages/auth/generator');
     } catch (err: any) {
       setError(err.message || 'Sign in failed');
     } finally {
       setLoading(false);
     }
-  } 
+  }
 
   return (
     <div className="min-h-screen bg-gray-100/40 px-6 md:px-16 py-10 flex items-center justify-center">
@@ -71,7 +73,7 @@ export default function SignInPage() {
         >
           <h2 className="text-3xl font-semibold font-poppins mb-2 flex gap-2">
             Create account on <span className="text-[#F0B246] flex"><h1 className="font-poppins text-3xl font-semibold flex gap-2 items-center">Weave <Spool /></h1>
-</span>
+            </span>
           </h2>
 
           <p className="text-gray-600 max-w-sm font-poppins mb-8">
@@ -82,7 +84,7 @@ export default function SignInPage() {
           <form onSubmit={handleSubmit} className="space-y-5 max-w-sm">
             <div className="flex flex-col space-y-4">
 
-                <input
+              <input
                 required
                 type="text"
                 value={name}

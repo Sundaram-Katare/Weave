@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { ClockFading, Hourglass } from "lucide-react";
 
 export default function Letters() {
   const { data: session } = useSession();
@@ -126,8 +127,8 @@ export default function Letters() {
             </div>
 
             <div className="mt-4 text-xs text-gray-500 space-y-1">
-              <p>📅 Created: {new Date(letter.createdAt).toLocaleDateString()}</p>
-              <p>🔄 Updated: {new Date(letter.updatedAt).toLocaleDateString()}</p>
+              <p className="flex gap-1 items-center"><ClockFading /> Created: {new Date(letter.createdAt).toLocaleDateString()}</p>
+              <p className="flex gap-1 items-center"><Hourglass /> Updated: {new Date(letter.updatedAt).toLocaleDateString()}</p>
             </div>
           </motion.div>
         ))}

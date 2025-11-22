@@ -1,91 +1,100 @@
 "use client";
-import { motion } from "framer-motion";
-import Image from "next/image";
 
-const galleryItems = [
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+
+const testimonials = [
   {
     id: 1,
-    title: "AI Generated Cover Letter",
-    img: "/gallery/sample1.png",
+    text: "Weave helped me generate a job-ready cover letter within seconds. It perfectly matched my skills to the role!",
+    name: "Aarav Mehta",
+    role: "Software Engineer",
+    img: "/images/testi1.png",
   },
   {
     id: 2,
-    title: "Resume Parsing Preview",
-    img: "/gallery/sample2.png",
-  },
-  {
-    id: 3,
-    title: "Job Description Analyzer",
-    img: "/gallery/sample3.png",
-  },
-  {
-    id: 4,
-    title: "Tone Selection",
-    img: "/gallery/sample4.png",
-  },
-  {
-    id: 5,
-    title: "Saved Letters Dashboard",
-    img: "/gallery/sample5.png",
-  },
-  {
-    id: 6,
-    title: "PDF Download Preview",
-    img: "/gallery/sample6.png",
+    text: "The best tool for creating personalized cover letters. Fast, smart, and incredibly accurate.",
+    name: "Priya Sharma",
+    role: "Product Designer",
+    img: "/images/testi2.png",
   },
 ];
 
-export default function GallerySection() {
-  return (
-    <section className="px-6 md:px-20 py-20 bg-white font-poppins">
-      
-      {/* Section Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="text-center mb-12"
-      >
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-800">
-          Gallery
-        </h2>
-        <p className="text-gray-500 mt-3 text-lg">
-          A quick look at what Tailor AI can generate for you.
-        </p>
-      </motion.div>
+export default function TestimonialCarousel() {
+  const [index, setIndex] = useState(0);
 
-      {/* Image Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-        {galleryItems.map((item) => (
+  const next = () => setIndex((index + 1) % testimonials.length);
+  const prev = () =>
+    setIndex(index === 0 ? testimonials.length - 1 : index - 1);
+
+  const item = testimonials[index];
+
+  return (
+    <section className="w-full flex flex-col items-center px-4 md:px-10 py-20 font-poppins">
+
+      {/* Title */}
+      <h1 className="text-3xl md:text-5xl font-bold mb-10 text-center">
+        What Our Users Say
+      </h1>
+
+      {/* Card Container */}
+      <div className="relative w-full max-w-4xl">
+
+        {/* Layered Background Cards */}
+        <div className="absolute inset-0 translate-y-6 md:translate-y-8 bg-yellow-400 rounded-3xl shadow-xl scale-90" />
+        <div className="absolute inset-0 translate-y-3 md:translate-y-5 bg-[#d2d2d2] rounded-3xl shadow-xl scale-95" />
+
+        {/* Main Testimonial Card */}
+        <AnimatePresence mode="wait">
           <motion.div
             key={item.id}
-            className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow bg-[#fafafa]"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: item.id * 0.1 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -60 }}
+            transition={{ duration: 0.4 }}
+            className="relative z-10 bg-black text-white rounded-3xl p-8 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center shadow-2xl"
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 200 }}
-            >
+            {/* Text Section */}
+            <div>
+              <p className="text-lg md:text-xl leading-relaxed mb-6">
+                {item.text}
+              </p>
+              <p className="text-sm md:text-base text-gray-300">
+                {item.name}, {item.role}
+              </p>
+            </div>
+
+            {/* Image Section */}
+            <div className="flex justify-center">
               <Image
                 src={item.img}
-                alt={item.title}
-                width={500}
+                alt={item.name}
+                width={350}
                 height={350}
-                className="object-cover w-full h-64"
+                className="rounded-xl object-cover"
               />
-            </motion.div>
-
-            <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-800">
-                {item.title}
-              </h3>
             </div>
           </motion.div>
-        ))}
+        </AnimatePresence>
+      </div>
+
+      {/* Navigation Buttons */}
+      <div className="flex gap-6 mt-10">
+        <button
+          onClick={prev}
+          className="p-4 rounded-full bg-gray-200 hover:bg-gray-300 transition shadow-md"
+        >
+          <ArrowLeft size={28} />
+        </button>
+
+        <button
+          onClick={next}
+          className="p-4 rounded-full bg-gray-200 hover:bg-gray-300 transition shadow-md"
+        >
+          <ArrowRight size={28} />
+        </button>
       </div>
     </section>
   );

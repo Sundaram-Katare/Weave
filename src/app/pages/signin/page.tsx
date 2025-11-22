@@ -25,7 +25,7 @@ export default function SignInPage() {
 
       // @ts-ignore
       if (res?.error) throw new Error(res.error);
-      router.push('/');
+      router.push('/pages/auth/generator');
     } catch (err: any) {
       setError(err.message || 'Sign in failed');
     } finally {

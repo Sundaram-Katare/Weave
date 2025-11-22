@@ -1,6 +1,7 @@
 "use client"
 import React from "react";
 import { motion } from "framer-motion";
+import { redirect } from "next/navigation";
 
 export default function Hero() {
     return (
@@ -20,16 +21,18 @@ export default function Hero() {
                             >
                                 <h1>Get a Job-specific</h1>
                                 <motion.h1>tailored <span className="text-[#D9AC57] font-bold ">Cover Letter</span></motion.h1>
-                                <h1>in <span className="text-[#D9AC57] font-bold ">15</span> seconds</h1>
+                                <h1>in <span className="text-[#D9AC57] font-bold ">60</span> seconds</h1>
                             </motion.div>
 
                             <div className="h-full relative top-40">
-                                <button className="bg-[#D9AC57] text-xl text-black cursor-pointer hover:bg-[#D9AC57]/40 top-20 px-2 py-2 rounded-xl">Get Cover Letter Now</button>
+                                <button className="bg-[#D9AC57] text-xl text-black cursor-pointer hover:bg-[#D9AC57]/40 top-20 px-2 py-2 rounded-xl"
+                                        onClick={() => redirect('/pages/auth/generator')}
+                                >Get Cover Letter Now</button>
                             </div>
                         </div>
 
                         <div className="flex justify-center">
-                            <img src="/images/heroImg.png" className="h-130 w-200" alt="" />
+                            <img src="/images/heroImg2.png" className="h-130 w-200" alt="" />
                         </div>
                     </div>
                 </div>

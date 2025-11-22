@@ -55,7 +55,7 @@ export default function SignInPage() {
           className="flex flex-col justify-center"
         >
           <h2 className="text-3xl font-semibold font-poppins mb-2">
-            Welcome back to <span className="text-[#F0B246]">Nucleus</span>
+            Welcome back to <span className="text-[#F0B246]">Weave</span>
           </h2>
 
           <p className="text-gray-600 max-w-sm font-poppins mb-8">

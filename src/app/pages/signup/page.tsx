@@ -1,6 +1,6 @@
 "use client";
 
-'use client';
+import { Spool } from "lucide-react";
 import React, { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -69,8 +69,9 @@ export default function SignInPage() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="flex flex-col justify-center"
         >
-          <h2 className="text-3xl font-semibold font-poppins mb-2">
-            Welcome back to <span className="text-[#F0B246]">Nucleus</span>
+          <h2 className="text-3xl font-semibold font-poppins mb-2 flex gap-2">
+            Create account on <span className="text-[#F0B246] flex"><h1 className="font-poppins text-3xl font-semibold flex gap-2 items-center">Weave <Spool /></h1>
+</span>
           </h2>
 
           <p className="text-gray-600 max-w-sm font-poppins mb-8">

@@ -7,32 +7,35 @@ const features = [
   { 
     title: "Smart Resume Parsing", 
     description: "Automatically extracts your skills, experience, and achievements from your resume.",
-    img: "https://cdn-icons-png.flaticon.com/512/3135/3135692.png"
+    img: "https://cdn-icons-png.flaticon.com/512/9429/9429631.png" // resume with scanning/parsing style icon [web:1]
   },
   { 
     title: "Job Description Analyzer", 
     description: "Understands key role requirements to tailor your cover letter effectively.",
-    img: "https://png.pngtree.com/png-vector/20230728/ourmid/pngtree-essay-clipart-man-with-glasses-and-glasses-holding-papers-with-some-vector-png-image_6813468.png"
+    img: "https://cdn-icons-png.flaticon.com/512/9068/9068990.png" // document with magnifying glass / analysis icon [web:1]
   },
   { 
     title: "AI-Generated Cover Letters", 
     description: "Creates personalized, professional cover letters in seconds.",
-    img: "https://static.vecteezy.com/system/resources/thumbnails/071/143/545/small/ai-light-bulb-with-connected-nodes-symbolizing-innovation-and-neural-network-3d-illustration-png.png"
+    img: "https://cdn-icons-png.flaticon.com/512/10310/10310473.png" // AI/brain + document style icon [web:1]
   },
   { 
     title: "Multiple Tone Options", 
     description: "Choose from Formal, Confident, or Friendly tones based on the job style.",
-    
+    img: "https://cdn-icons-png.flaticon.com/512/7590/7590528.png" // slider/settings style tone icon [web:13]
   },
   { 
     title: "1-Click PDF Download", 
-    description: "Export clean, formatted PDFs ready to submit in your job applications."
+    description: "Export clean, formatted PDFs ready to submit in your job applications.",
+    img: "https://cdn-icons-png.flaticon.com/512/337/337946.png" // download/PDF style icon [web:1]
   },
   { 
     title: "Save & Manage Letters", 
-    description: "Store all your generated cover letters in a personal dashboard."
+    description: "Store all your generated cover letters in a personal dashboard.",
+    img: "https://cdn-icons-png.flaticon.com/512/9422/9422044.png" // folder/dashboard/documents management icon [web:1]
   },
 ];
+
 
 
 export default function FeaturesPage() {
@@ -46,7 +49,7 @@ export default function FeaturesPage() {
   }, [])
 
   return (
-    <div className="h-screen max-w-screen bg-blue-200/20 text-black font-poppins flex items-center justify-center overflow-hidden">
+    <div className="h-screen max-w-screen bg-gradient-to-b from-gray-100 to-white text-black font-poppins flex items-center justify-center overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={index}

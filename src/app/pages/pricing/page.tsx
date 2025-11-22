@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "@/src/components/Navbar";
 import { Check } from "lucide-react";
+import Footer from "@/src/components/Footer";
 
 export default function Pricing() {
     const [showSplash, setShowSplash] = useState(true);
 
     useEffect(() => {
-        const timer = setTimeout(() => setShowSplash(false), 3000);
+        const timer = setTimeout(() => setShowSplash(false), 2800);
         return () => clearTimeout(timer);
     }, []);
 
@@ -25,15 +26,15 @@ export default function Pricing() {
                                initial={{ opacity: 0, scale:0.5 }}
                                animate={{ opacity: 1, scale: 1 }}
                                transition={{ duration: 1, ease: "easeOut" }}
-                               src={"https://user-gen-media-assets.s3.amazonaws.com/seedream_images/b3d8ea56-3533-4a1e-826e-4a556241e22c.png"} 
+                               src={"https://images.squarespace-cdn.com/content/v1/61279c7a695d1756146c5656/0481e5b0-db53-433c-a122-9209064fc84e/Unravel.gif"} 
                                />
 
-                              <motion.h1 
+                              {/* <motion.h1 
                               initial={{ opacity: 0, x: -60 }}
                               animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 1, ease: "easeOut" }}
                               exit={{ opacity: 0, rotate: -10}}  
-                              className="font-cursive text-5xl font-semibold">Tailor AI</motion.h1>
+                              className="font-cursive text-5xl font-semibold">Tailor AI</motion.h1> */}
                             </motion.div>
                         )
 
@@ -46,12 +47,14 @@ export default function Pricing() {
                              transition={{ duration: 1, ease: "easeInOut" }}
                             >
                                <h1 className="text-5xl font-medium">Pricing and Plans</h1>
-                               <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt quos optio amet la</p>
+                               <p>Check out our monthly pricing</p>
 
                                <div className="grid grid-cols-2 gap-20">
                                  
-                                <div className="p-4 border shadow-md shadow-black rounded-lg flex flex-col space-y-10">
+                                <div className="p-4 border shadow-md shadow-black rounded-lg flex flex-col space-y-10 hover:scale-105 transition-all duration-300 ease-in-out bg-white">
                                     <h4 className="text-2xl font-medium">Free</h4>
+                                    
+                                    {/* <h6 className="text-md font-light">per month</h6> */}
 
                                     <h2 className="text-6xl font-semibold">$0</h2>
 
@@ -67,7 +70,7 @@ export default function Pricing() {
                                     </div>
                                  </div>
 
-                                  <div className="p-4 border shadow-md shadow-black bg-gray-800 text-gray-100 rounded-lg flex flex-col space-y-10">
+                                  <div className="p-4 border shadow-md shadow-black bg-gray-800 text-gray-100 rounded-lg flex flex-col space-y-10 hover:scale-105 transition-all duration-300 ease-in-out">
                                     <h4 className="text-2xl font-medium">Pro</h4>
 
                                     <h2 className="text-6xl font-semibold">$12</h2>
@@ -91,6 +94,8 @@ export default function Pricing() {
 
                 </div>
             </div>
+
+            <Footer />
         </>
     )
 }

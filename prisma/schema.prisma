@@ -13,6 +13,7 @@ model User {
   name         String?
   email        String         @unique
   password     String
+  tokens       Int            @default(30)
   image        String?
   letters      Letter[]
   createdAt    DateTime       @default(now())

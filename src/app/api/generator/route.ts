@@ -1,45 +1,9 @@
-// import { GoogleGenAI } from "@google/genai";
-// import { NextRequest, NextResponse } from "next/server";
-
-// export async function POST(req: NextRequest) {
-//   try {
-//     const { prompt } = await req.json();
-
-//     if (!prompt) {
-//       return NextResponse.json(
-//         { error: "Prompt is required" },
-//         { status: 400 }
-//       );
-//     }
-
-//     // Initialize Gemini client with API key from environment variable
-//     const ai = new GoogleGenAI({
-//       apiKey: process.env.GEMINI_API_KEY,
-//     });
-
-//     // Generate content using Gemini 2.5 Flash model
-//     const response = await ai.models.generateContent({
-//       model: "gemini-2.5-pro",
-//       contents: prompt,
-//     });
-
-//     return NextResponse.json({
-//       success: true,
-//       text: response.text,
-//     });
-//   } catch (error: any) {
-//     console.error("Gemini API Error:", error);
-//     return NextResponse.json(
-//       { error: error.message || "Failed to generate content" },
-//       { status: 500 }
-//     );
-//   }
-// }
-
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
+import { prisma } from "@/lib/prisma";
 
-// Convert uploaded PDF file to a base64 string
 async function fileToBase64(file: File) {
   const buffer = Buffer.from(await file.arrayBuffer());
   return buffer.toString("base64");
@@ -47,11 +11,41 @@ async function fileToBase64(file: File) {
 
 export async function POST(req: NextRequest) {
   try {
-    const formData = await req.formData();
+    // Get authenticated user session
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user?.email) {
+      return NextResponse.json(
+        { error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
 
+    // Get user from database
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email }
+    });
+
+    if (!user) {
+      return NextResponse.json(
+        { error: "User not found" },
+        { status: 404 }
+      );
+    }
+
+    // Check if user has enough tokens
+    if (user.tokens < 10) {
+      return NextResponse.json(
+        { error: "Insufficient tokens. Required: 10, Available: " + user.tokens },
+        { status: 402 }
+      );
+    }
+
+    const formData = await req.formData();
     const resumeFile = formData.get("resume") as File;
     const jobDescription = formData.get("jd") as string;
     const tone = formData.get("tone") as string;
+    const title = formData.get("title") as string;
+    const jobRole = formData.get("jobRole") as string;
 
     if (!resumeFile || !jobDescription || !tone) {
       return NextResponse.json(
@@ -60,47 +54,71 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Convert PDF → Base64
     const resumeBase64 = await fileToBase64(resumeFile);
+    const resumeText = resumeFile.name;
 
-    // Gemini client
-    const ai = new GoogleGenAI({
-      apiKey: process.env.GEMINI_API_KEY!,
-    });
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 
-  
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-pro",
-      contents: [
-        {
-          role: "user",
-          parts: [
-            {
-              inlineData: {
-                mimeType: resumeFile.type,
-                data: resumeBase64,
-              },
-            },
-            {
-              text: `Job Description:\n${jobDescription}\n\nTone: ${tone}\n\nGenerate a highly personalized 30-word cover letter based on the resume + JD. Keep it concise but impactful. No generic lines.`
-            }
-          ],
+    const response = await model.generateContent([
+      {
+        inlineData: {
+          mimeType: resumeFile.type,
+          data: resumeBase64,
+        },
+      },
+      {
+        text: `Using the resume (internal PDF data) and the job description provided below, generate a clean, highly personalized cover letter.
+
+STRICT RULES:
+- Output ONLY the final cover letter text.
+- NO headings, NO disclaimers, NO notes, NO “Here is your cover letter”.
+- Write around 250 words.
+- Use 3–4 short paragraphs with proper spacing.
+- Maintain the selected tone: ${tone}.
+- Align the candidate’s experience, skills, and achievements directly with the job requirements.
+- Make the letter strong, clear, concise, and professional.
+- Do NOT include the words “Resume”, “Job Description”, or metadata in the response.
+
+Job Description:
+${jobDescription}
+`
+      }
+    ]);
+
+    const coverLetterText = response.response.text();
+
+    // Deduct 10 tokens and save letter in database
+    const [updatedUser, letter] = await prisma.$transaction([
+      prisma.user.update({
+        where: { id: user.id },
+        data: { tokens: user.tokens - 10 }
+      }),
+      prisma.letter.create({
+        data: {
+          userId: user.id,
+          title: title || "Untitled",
+          jobRole: jobRole || "Unknown",
+          resumeText: resumeText,
+          jobDescription: jobDescription,
+          tone: tone,
+          content: coverLetterText
         }
-      ]
-    });
-
-    const text = response.text;
+      })
+    ]);
 
     return NextResponse.json({
       success: true,
-      coverLetter: text,
-    });
+      coverLetter: coverLetterText,
+      tokensRemaining: updatedUser.tokens,
+      letterId: letter.id
+    }, { status: 200 });
+
   } catch (error: any) {
-    console.error("Gemini API Error:", error);
+    console.error("Generator API Error:", error);
     return NextResponse.json(
       { error: error.message || "Something went wrong" },
       { status: 500 }
     );
   }
 }
-

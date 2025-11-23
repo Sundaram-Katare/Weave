@@ -80,21 +80,21 @@ export default function Navbar() {
               Home
             </Link>
 
-            <Link href="/pages/faq" onClick={() => setOpen(false)}>
+            <Link href="/faq" onClick={() => setOpen(false)}>
               FAQ
             </Link>
 
-            <Link href="/pages/pricing" onClick={() => setOpen(false)}>
+            <Link href="/pricing" onClick={() => setOpen(false)}>
               Pricing
             </Link>
 
-            <Link href="/pages/auth/generator" onClick={() => setOpen(false)}>
+            <Link href="/auth/generator" onClick={() => setOpen(false)}>
               Generate
             </Link>
 
             {!session ? (
               <Link
-                href="/pages/signin"
+                href="/signin"
                 onClick={() => setOpen(false)}
                 className="bg-[#082D8C] cursor-pointer text-white hover:bg-blue-400 transition-all hover:scale-105 text-lg flex gap-2 items-center px-3 py-2 rounded-xl"
               >
@@ -105,7 +105,7 @@ export default function Navbar() {
               <button
                 onClick={() => {
                   setOpen(false);
-                  signOut({ callbackUrl: "/pages/signin" });
+                  signOut({ callbackUrl: "/signin" });
                 }}
                 className="bg-red-600 hover:bg-red-400 hover:scale-105 transition-all text-white flex gap-2 items-center px-3 py-2 rounded-xl text-lg"
               >

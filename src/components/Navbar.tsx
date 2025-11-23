@@ -88,6 +88,10 @@ export default function Navbar() {
               Pricing
             </Link>
 
+            <Link href="/gallery" onClick={() => setOpen(false)}>
+              Gallery
+            </Link>
+
             <Link href="/auth/generator" onClick={() => setOpen(false)}>
               Generate
             </Link>

@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧵 Weave – AI Cover Letter Generator
 
-## Getting Started
+Weave is an AI-powered web application that generates **professionally tailored cover letters** using your **resume + job description** in seconds.  
+It aligns your experience with job requirements, formats the letter cleanly, and provides a beautiful, responsive interface.
 
-First, run the development server:
+---
 
+## 📷 Preview
+<img width="1889" height="909" alt="Screenshot 2025-11-22 203640" src="https://github.com/user-attachments/assets/2bfb8fb4-1e1a-4bc5-a9cc-3aecbe7c886d" />
+
+
+## 🚀 Features
+
+### 🔹 AI Features
+- 🤖 **AI-Generated Cover Letters** using **Gemini 2.5 Pro**
+- 📄 **Resume Parsing** (PDF → text extraction)
+- 📝 **Job Description Analysis**
+- 🎭 **Multiple Tone Styles** — Formal, Confident, Friendly
+- ✨ **Highly personalized output** aligned with your skills & the JD
+
+### 🔹 Application Features
+- 💾 Save & manage generated cover letters
+- 🔐 **User Authentication** (NextAuth.js)
+- 🎨 Modern UI with **Tailwind CSS**
+- 🎞 Smooth animations using **Framer Motion** 
+- 🧭 Responsive Pages
+
+---
+
+## 🏗️ Tech Stack
+
+### **Frontend**
+- Next.js 16 (App Router)
+- Tailwind CSS
+- TypeScript
+- Framer Motion
+- Lucide Icons
+
+### **Backend**
+- Next.js API Routes
+- Prisma ORM
+- PostgreSQL (NeonDB)
+- NextAuth.js (Credentials / OAuth support)
+
+### **AI**
+- Google Gemini 2.5 Pro  
+- `generateContent` API for cover letter generation
+---
+
+### Environment Variables
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+NEXTAUTH_URL=your_vercel_url
+NEXTAUTH_SECRET=your_generated_secret
+
+DATABASE_URL=your_neondb_postgres_url
+
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Run Locally
+```bash
+ npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ npx prisma generate
+ npx prisma migrate dev
 
-## Learn More
+npm run dev 
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Deployement
+- Deployed on Vercel
